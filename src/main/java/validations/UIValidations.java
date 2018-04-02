@@ -7,10 +7,23 @@ import exceptions.BadYearException;
 
 public class UIValidations {
     public static void validateClient(String name, String address)throws BadFormatException {
-        if(!name.equals("") && !address.equals("") && !name.equals(" ")){
-            for(int i=0;i<name.length();i++){
-                if((!Character.isUpperCase(name.charAt(i))) && (!Character.isLowerCase(name.charAt(i))) && (!Character.isSpaceChar(name.charAt(i)))){
+        if(!name.equals("") && !address.equals("")){
+            // maximum 256 characters for name
+            if (name.length()>256){
+                String message = "Maximum 256 characters for name";
+                throw new BadFormatException(message);
+            }
+            // permitted characters for name: space( separator), letters
+            for(int i=0;i<name.length();i++) {
+                if ((!Character.isUpperCase(name.charAt(i))) && (!Character.isLowerCase(name.charAt(i))) && (!Character.isSpaceChar(name.charAt(i)))) {
                     String message = "Invalid character: " + name.charAt(i);
+                    throw new BadFormatException(message);
+                }
+            }
+            // permitted characters for address: space( separator), letters, digits
+            for(int i=0;i<address.length();i++){
+                if((!Character.isDigit(address.charAt(i))) && (!Character.isUpperCase(address.charAt(i))) && (!Character.isLowerCase(address.charAt(i))) && (!Character.isSpaceChar(address.charAt(i)))){
+                    String message = "Invalid character: " + address.charAt(i);
                     throw new BadFormatException(message);
                 }
             }

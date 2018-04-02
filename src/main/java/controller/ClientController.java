@@ -1,11 +1,13 @@
 package controller;
 
+import exceptions.BadFormatException;
 import exceptions.BusinessException;
 import model.Client;
 import model.Invoice;
 import repository.ClientRepository;
 import repository.InvoiceRepository;
 import validations.BusinessValidations;
+import validations.UIValidations;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class ClientController {
         // check client uniqueness
         try {
             BusinessValidations.isClientUnique(clientRepository.getClients(), name, address);
+            UIValidations.validateClient(name, address);
 
             int id =clientRepository.getSize();
             Client client = new Client(name, address, id);
@@ -30,7 +33,7 @@ public class ClientController {
             clientRepository.addClient(client);
 
             return true;
-        }catch(BusinessException e){
+        }catch(BusinessException | BadFormatException e){
             System.out.println(e.getMessage());
             return false;
         }

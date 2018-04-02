@@ -77,7 +77,7 @@ public class DataManager {
                 s = "";
                 for(Iterator<Client> i = clients.iterator(); i.hasNext();){
                     Client c = i.next();
-                    s = c.toString() + System.getProperty("line.separator");
+                    s = c.toString();
                 }
                 bwc.write(s);
             }
@@ -85,7 +85,7 @@ public class DataManager {
                 s = "";
                 for(Iterator<Invoice> i = invoices.iterator(); i.hasNext();){
                     Invoice invoice = i.next();
-                    s = invoice.toString() + System.getProperty("line.separator");
+                    s = invoice.toString();
                 }
                 bwi.write(s);
             }

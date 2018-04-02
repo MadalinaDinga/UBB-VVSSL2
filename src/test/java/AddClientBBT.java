@@ -1,4 +1,5 @@
 import controller.ClientController;
+import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class AddClientBBT extends TestCase{
 
         try {
             ctrl.AddClient("mada", "doro");
-        } catch (Exception e) {
+        } catch (AssertionFailedError e) {
             e.printStackTrace();
             assertTrue(e.getMessage().equals("Client already exists!"));
         }

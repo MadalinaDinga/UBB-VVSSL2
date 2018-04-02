@@ -14,9 +14,9 @@ public class ClientController {
 	private ClientRepository clientRepository;
 	private InvoiceRepository invoiceRepository;
     
-    public ClientController(){
-        clientRepository = new ClientRepository();
-        invoiceRepository = new InvoiceRepository();
+    public ClientController(ClientRepository clientRepository, InvoiceRepository invoiceRepository){
+        this.clientRepository = clientRepository;
+        this.invoiceRepository = invoiceRepository;
     }
     
     public boolean AddClient(String name, String address){

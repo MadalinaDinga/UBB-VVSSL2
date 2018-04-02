@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_electricap3" default="compile.module.electricap3">
+  <dirname property="module.electricap3.basedir" file="${ant.file.module_electricap3}"/>
+  
+  <property name="module.jdk.home.electricap3" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.electricap3" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.electricap3" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.electricap3" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="electricap3.output.dir" value="${module.electricap3.basedir}/target/classes"/>
+  <property name="electricap3.testoutput.dir" value="${module.electricap3.basedir}/target/test-classes"/>
+  
+  <path id="electricap3.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="electricap3.module.production.classpath">
+    <path refid="${module.jdk.classpath.electricap3}"/>
+  </path>
+  
+  <path id="electricap3.runtime.production.module.classpath">
+    <pathelement location="${electricap3.output.dir}"/>
+  </path>
+  
+  <path id="electricap3.module.classpath">
+    <path refid="${module.jdk.classpath.electricap3}"/>
+    <pathelement location="${electricap3.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+  </path>
+  
+  <path id="electricap3.runtime.module.classpath">
+    <pathelement location="${electricap3.testoutput.dir}"/>
+    <pathelement location="${electricap3.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.electricap3">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.electricap3">
+    <patternset refid="excluded.from.module.electricap3"/>
+  </patternset>
+  
+  <path id="electricap3.module.sourcepath">
+    <dirset dir="${module.electricap3.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="electricap3.module.test.sourcepath">
+    <dirset dir="${module.electricap3.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.electricap3" depends="compile.module.electricap3.production,compile.module.electricap3.tests" description="Compile module electricaP3"/>
+  
+  <target name="compile.module.electricap3.production" depends="register.custom.compilers" description="Compile module electricaP3; production classes">
+    <mkdir dir="${electricap3.output.dir}"/>
+    <javac2 destdir="${electricap3.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.electricap3}/javac">
+      <compilerarg line="${compiler.args.electricap3}"/>
+      <bootclasspath refid="electricap3.module.bootclasspath"/>
+      <classpath refid="electricap3.module.production.classpath"/>
+      <src refid="electricap3.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.electricap3"/>
+    </javac2>
+    
+    <copy todir="${electricap3.output.dir}">
+      <fileset dir="${module.electricap3.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.electricap3.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.electricap3.tests" depends="register.custom.compilers,compile.module.electricap3.production" description="compile module electricaP3; test classes" unless="skip.tests">
+    <mkdir dir="${electricap3.testoutput.dir}"/>
+    <javac2 destdir="${electricap3.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.electricap3}/javac">
+      <compilerarg line="${compiler.args.electricap3}"/>
+      <bootclasspath refid="electricap3.module.bootclasspath"/>
+      <classpath refid="electricap3.module.classpath"/>
+      <src refid="electricap3.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.electricap3"/>
+    </javac2>
+    
+    <copy todir="${electricap3.testoutput.dir}">
+      <fileset dir="${module.electricap3.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.electricap3" description="cleanup module">
+    <delete dir="${electricap3.output.dir}"/>
+    <delete dir="${electricap3.testoutput.dir}"/>
+  </target>
+</project>

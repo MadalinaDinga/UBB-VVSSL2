@@ -8,8 +8,8 @@ public class InvoiceRepository {
     private DataManager dataManager;
     private ArrayList<Invoice> invoices;
 
-    public InvoiceRepository() {
-        dataManager = new DataManager();
+    public InvoiceRepository(DataManager dataManager) {
+        this.dataManager = dataManager;
         invoices = dataManager.getInvoicesList();
     }
 

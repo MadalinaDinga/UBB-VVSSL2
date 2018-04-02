@@ -1,5 +1,4 @@
 mada,doro,0
 bia,doro,1
 alex,buc,2
-bi,ceva,3
 

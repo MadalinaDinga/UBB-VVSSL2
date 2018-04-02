@@ -8,15 +8,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class DataManager {
-	private final static String fileClient = "client.txt";
-    private final static String fileInvoice = "invoice.txt";
+	private String fileClient;
+    private String fileInvoice;
 
     private ArrayList<Client> clients;
     private ArrayList<Invoice> invoices;
     
-    public DataManager(){
+    public DataManager(String fileClient, String fileInvoice){
         clients = new ArrayList<>();
         invoices = new ArrayList<>();
+
+        this.fileClient = fileClient;
+        this.fileInvoice = fileInvoice;
 
         LoadClient();
         LoadInvoices();

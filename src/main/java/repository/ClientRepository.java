@@ -8,8 +8,8 @@ public class ClientRepository {
     private DataManager dataManager;
     private ArrayList<Client> clients;
 
-    public ClientRepository() {
-        dataManager = new DataManager();
+    public ClientRepository(DataManager dataManager) {
+        this.dataManager = dataManager;
         clients = dataManager.getClientsList();
     }
 

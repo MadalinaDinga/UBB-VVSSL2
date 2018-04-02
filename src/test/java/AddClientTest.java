@@ -7,7 +7,7 @@ import repository.ClientRepository;
 import repository.DataManager;
 import repository.InvoiceRepository;
 
-public class AddClientBBT extends TestCase{
+public class AddClientTest extends TestCase{
     private final String fileClient = "src/test/java/clientTest.txt";
     private final String fileInvoice = "src/test/java/invoiceTest.txt";
     private DataManager dataManager;

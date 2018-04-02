@@ -1,0 +1,116 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ClientRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ClientRepository (repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClientRepository</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    41.7%
+  </span>
+  <span class="absValue">
+    (5/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import model.Client;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.ArrayList;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public class ClientRepository {
+<i>8</i>&nbsp;    private DataManager dataManager;
+<i>9</i>&nbsp;    private ArrayList&lt;Client&gt; clients;
+<i>10</i>&nbsp;
+<b class="fc"><i>11</i>&nbsp;    public ClientRepository() {</b>
+<b class="fc"><i>12</i>&nbsp;        dataManager = new DataManager();</b>
+<b class="fc"><i>13</i>&nbsp;        clients = dataManager.getClientsList();</b>
+<b class="fc"><i>14</i>&nbsp;    }</b>
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    public ArrayList&lt;Client&gt; getClients() {
+<b class="fc"><i>17</i>&nbsp;        return clients;</b>
+<i>18</i>&nbsp;    }
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public void setClients(ArrayList&lt;Client&gt; clients) {
+<b class="nc"><i>21</i>&nbsp;        this.clients = clients;</b>
+<b class="nc"><i>22</i>&nbsp;    }</b>
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    public int getSize(){
+<b class="nc"><i>25</i>&nbsp;        return clients.size();</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public void addClient(Client client) {
+<b class="nc"><i>29</i>&nbsp;        dataManager.getClientsList().add(client);</b>
+<b class="nc"><i>30</i>&nbsp;        clients = dataManager.getClientsList();</b>
+<b class="nc"><i>31</i>&nbsp;        dataManager.SaveChanges();</b>
+<b class="nc"><i>32</i>&nbsp;    }</b>
+<i>33</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-04-02 12:03</div>
+</div>
+</body>
+</html>

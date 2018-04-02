@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ClientController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">controller</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ClientController (controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClientController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    43.5%
+  </span>
+  <span class="absValue">
+    (20/ 46)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package controller;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import exceptions.BusinessException;
+<i>4</i>&nbsp;import model.Client;
+<i>5</i>&nbsp;import model.Invoice;
+<i>6</i>&nbsp;import repository.ClientRepository;
+<i>7</i>&nbsp;import repository.InvoiceRepository;
+<i>8</i>&nbsp;import validations.BusinessValidations;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import java.util.ArrayList;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;public class ClientController {
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;	private ClientRepository clientRepository;
+<i>15</i>&nbsp;	private InvoiceRepository invoiceRepository;
+<i>16</i>&nbsp;    
+<b class="fc"><i>17</i>&nbsp;    public ClientController(){</b>
+<b class="fc"><i>18</i>&nbsp;        clientRepository = new ClientRepository();</b>
+<b class="fc"><i>19</i>&nbsp;        invoiceRepository = new InvoiceRepository();</b>
+<b class="fc"><i>20</i>&nbsp;    }</b>
+<i>21</i>&nbsp;    
+<i>22</i>&nbsp;    public boolean AddClient(String name, String address){
+<i>23</i>&nbsp;        // check client uniqueness
+<i>24</i>&nbsp;        try {
+<b class="fc"><i>25</i>&nbsp;            BusinessValidations.isClientUnique(clientRepository.getClients(), name, address);</b>
+<i>26</i>&nbsp;
+<b class="nc"><i>27</i>&nbsp;            int id =clientRepository.getSize();</b>
+<b class="nc"><i>28</i>&nbsp;            Client client = new Client(name, address, id);</b>
+<i>29</i>&nbsp;
+<b class="nc"><i>30</i>&nbsp;            clientRepository.addClient(client);</b>
+<i>31</i>&nbsp;
+<b class="nc"><i>32</i>&nbsp;            return true;</b>
+<b class="fc"><i>33</i>&nbsp;        }catch(BusinessException e){</b>
+<b class="fc"><i>34</i>&nbsp;            System.out.println(e.getMessage());</b>
+<b class="fc"><i>35</i>&nbsp;            return false;</b>
+<i>36</i>&nbsp;        }
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;    
+<i>39</i>&nbsp;    public boolean AddSubscriberInvoice(String name, String address, int year, int month, float toPay, float paid){
+<i>40</i>&nbsp;        try {
+<i>41</i>&nbsp;            //check if client exists
+<b class="fc"><i>42</i>&nbsp;            BusinessValidations.existsClient(clientRepository.getClients(), name, address);</b>
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;            //check invoice uniqueness
+<b class="fc"><i>45</i>&nbsp;            int idClient = this.findClientId(name,address);</b>
+<b class="fc"><i>46</i>&nbsp;            Invoice invoice = new Invoice(year, month, toPay, paid, idClient);</b>
+<b class="fc"><i>47</i>&nbsp;            BusinessValidations.isInvoiceUnique(invoiceRepository.getInvoices(), invoice);</b>
+<i>48</i>&nbsp;
+<b class="nc"><i>49</i>&nbsp;            invoiceRepository.addInvoice(invoice);</b>
+<i>50</i>&nbsp;
+<b class="nc"><i>51</i>&nbsp;            return true;</b>
+<b class="fc"><i>52</i>&nbsp;        }catch(BusinessException e) {</b>
+<b class="fc"><i>53</i>&nbsp;            System.out.println(e.getMessage());</b>
+<b class="fc"><i>54</i>&nbsp;            return false;</b>
+<i>55</i>&nbsp;        }
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    public String showInvoicesForClient(String name, String address){
+<i>59</i>&nbsp;        try{
+<i>60</i>&nbsp;            //check if client exists
+<b class="nc"><i>61</i>&nbsp;            BusinessValidations.existsClient(clientRepository.getClients(), name, address);</b>
+<i>62</i>&nbsp;
+<b class="nc"><i>63</i>&nbsp;            int idClient = this.findClientId(name, address);</b>
+<i>64</i>&nbsp;
+<b class="nc"><i>65</i>&nbsp;            StringBuilder subscriberInvoices = new StringBuilder();</b>
+<b class="nc"><i>66</i>&nbsp;            for (Invoice invoice : invoiceRepository.getInvoices()){</b>
+<b class="nc"><i>67</i>&nbsp;                if(invoice.getIdClient() == idClient){</b>
+<b class="nc"><i>68</i>&nbsp;                    subscriberInvoices.append(&quot;Year: &quot;);</b>
+<b class="nc"><i>69</i>&nbsp;                    subscriberInvoices.append(invoice.getYear());</b>
+<b class="nc"><i>70</i>&nbsp;                    subscriberInvoices.append(&quot; &quot;);</b>
+<b class="nc"><i>71</i>&nbsp;                    subscriberInvoices.append(&quot;Month: &quot;);</b>
+<b class="nc"><i>72</i>&nbsp;                    subscriberInvoices.append(invoice.getMonth());</b>
+<b class="nc"><i>73</i>&nbsp;                    subscriberInvoices.append(&quot; &quot;);</b>
+<b class="nc"><i>74</i>&nbsp;                    subscriberInvoices.append(&quot;Penalty: &quot;);</b>
+<b class="nc"><i>75</i>&nbsp;                    subscriberInvoices.append(invoice.getPenalty());</b>
+<b class="nc"><i>76</i>&nbsp;                    subscriberInvoices.append(&quot;\n&quot;);</b>
+<i>77</i>&nbsp;                }
+<b class="nc"><i>78</i>&nbsp;            }</b>
+<b class="nc"><i>79</i>&nbsp;            return subscriberInvoices.toString();</b>
+<b class="nc"><i>80</i>&nbsp;        }catch(BusinessException e) {</b>
+<b class="nc"><i>81</i>&nbsp;            System.out.println(e.getMessage());</b>
+<b class="nc"><i>82</i>&nbsp;            return null;</b>
+<i>83</i>&nbsp;        }
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    private int findClientId(String name, String address){
+<b class="fc"><i>87</i>&nbsp;        ArrayList&lt;Client&gt; clients = clientRepository.getClients();</b>
+<b class="fc"><i>88</i>&nbsp;        for(int j=0; j&lt;clients.size(); j++){</b>
+<b class="fc"><i>89</i>&nbsp;            Client client = clients.get(j);</b>
+<b class="fc"><i>90</i>&nbsp;            if(client.getName().equals(name) &amp;&amp; client.getAddress().equals(address)){</b>
+<b class="fc"><i>91</i>&nbsp;                return client.getId();</b>
+<i>92</i>&nbsp;            }
+<i>93</i>&nbsp;        }
+<b class="nc"><i>94</i>&nbsp;        return -1;</b>
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-04-02 12:03</div>
+</div>
+</body>
+</html>

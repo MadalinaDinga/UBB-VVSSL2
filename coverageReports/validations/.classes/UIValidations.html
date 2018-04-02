@@ -1,0 +1,122 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UIValidations</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">validations</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UIValidations (validations)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UIValidations</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package validations;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import exceptions.BadFormatException;
+<i>4</i>&nbsp;import exceptions.BadMonthException;
+<i>5</i>&nbsp;import exceptions.BadSumException;
+<i>6</i>&nbsp;import exceptions.BadYearException;
+<i>7</i>&nbsp;
+<b class="nc"><i>8</i>&nbsp;public class UIValidations {</b>
+<i>9</i>&nbsp;    public static void validateClient(String name, String address)throws BadFormatException {
+<b class="nc"><i>10</i>&nbsp;        if(!name.equals(&quot;&quot;) &amp;&amp; !address.equals(&quot;&quot;) &amp;&amp; !name.equals(&quot; &quot;)){</b>
+<b class="nc"><i>11</i>&nbsp;            for(int i=0;i&lt;name.length();i++){</b>
+<b class="nc"><i>12</i>&nbsp;                if((!Character.isUpperCase(name.charAt(i))) &amp;&amp; (!Character.isLowerCase(name.charAt(i))) &amp;&amp; (!Character.isSpaceChar(name.charAt(i)))){</b>
+<b class="nc"><i>13</i>&nbsp;                    String message = &quot;Invalid character: &quot; + name.charAt(i);</b>
+<b class="nc"><i>14</i>&nbsp;                    throw new BadFormatException(message);</b>
+<i>15</i>&nbsp;                }
+<i>16</i>&nbsp;            }
+<i>17</i>&nbsp;        }else{
+<b class="nc"><i>18</i>&nbsp;             throw new BadFormatException(&quot;Name or address cannot be empty!&quot;);</b>
+<i>19</i>&nbsp;        }
+<i>20</i>&nbsp;    }
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    public static void isValidYear(int year) throws BadYearException {
+<b class="nc"><i>23</i>&nbsp;        if(year &lt; 0) {</b>
+<b class="nc"><i>24</i>&nbsp;            throw new BadYearException(&quot;Year can&#39;t be 0 or less!&quot;);</b>
+<i>25</i>&nbsp;        }
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public static void isValidMonth(int month) throws BadMonthException {
+<b class="nc"><i>29</i>&nbsp;        if (month &lt; 0){</b>
+<b class="nc"><i>30</i>&nbsp;            throw new BadMonthException(&quot;Month can&#39;t be 0 or less!&quot;);</b>
+<i>31</i>&nbsp;        }
+<i>32</i>&nbsp;    }
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    public static void isValidSum(float sum) throws BadSumException {
+<b class="nc"><i>35</i>&nbsp;        if (sum &lt; 0){</b>
+<b class="nc"><i>36</i>&nbsp;            throw new BadSumException(&quot;Money to pay can&#39;t be less than 0!&quot;);</b>
+<i>37</i>&nbsp;        }
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-04-02 12:03</div>
+</div>
+</body>
+</html>

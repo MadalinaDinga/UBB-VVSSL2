@@ -113,7 +113,7 @@ public class ElectricaUI {
 						System.out.println("Success!");
 
 				}catch(NumberFormatException | BadFormatException e) {
-					System.out.println("A number should be given as input for the previous field.");
+					System.out.println(e.getMessage());
 				}
 			}
 			if(cmd==3)

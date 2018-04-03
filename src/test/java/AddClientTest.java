@@ -21,11 +21,11 @@ public class AddClientTest extends TestCase{
         ctrl = new ClientController(clientRepository, invoiceRepository);
     }
 
-    @After
-    public void tearDown() {
-        //clean up
-        TestUtils.deleteFileContent(fileClient);
-    }
+//    @After
+//    public void tearDown() {
+//        //clean up
+//        TestUtils.deleteFileContent(fileClient);
+//    }
 
     @Test
     public void testAddValidClient() {

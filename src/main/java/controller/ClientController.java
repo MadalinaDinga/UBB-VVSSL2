@@ -24,8 +24,9 @@ public class ClientController {
     public boolean AddClient(String name, String address){
         // check client uniqueness
         try {
-            BusinessValidations.isClientUnique(clientRepository.getClients(), name, address);
+            // input fields validation
             UIValidations.validateClient(name, address);
+            BusinessValidations.isClientUnique(clientRepository.getClients(), name, address);
 
             int id =clientRepository.getSize();
             Client client = new Client(name, address, id);
@@ -41,6 +42,12 @@ public class ClientController {
     
     public boolean AddSubscriberInvoice(String name, String address, int year, int month, float toPay, float paid){
         try {
+            // input fields validation
+            UIValidations.validateClient(name,address);
+            UIValidations.isValidSum(toPay);
+            UIValidations.isValidSum(paid);
+            UIValidations.isValidMonth(month);
+            UIValidations.isValidYear(year);
             //check if client exists
             BusinessValidations.existsClient(clientRepository.getClients(), name, address);
 
@@ -52,7 +59,7 @@ public class ClientController {
             invoiceRepository.addInvoice(invoice);
 
             return true;
-        }catch(BusinessException e) {
+        }catch(BusinessException | BadFormatException e) {
             System.out.println(e.getMessage());
             return false;
         }

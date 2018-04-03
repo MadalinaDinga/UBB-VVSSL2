@@ -1,3 +1,4 @@
+import WBT.AddInvoiceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -5,6 +6,7 @@ import org.junit.runners.Suite;
 
 @Suite.SuiteClasses({
         AddClientTest.class,
+        AddInvoiceTest.class,
 })
 
 public class Lab2TestSuite {

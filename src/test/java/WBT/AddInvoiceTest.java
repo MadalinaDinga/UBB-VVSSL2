@@ -37,15 +37,47 @@ public class AddInvoiceTest extends TestCase{
 
     @Test
     public void testWBT1() {
-        System.out.println("\ntestAddValidClient");
+        System.out.println("\ntestAddValidInvoice");
         ctrl.AddClient("mada", "doro");
         addSuccessful("mada", "doro", 2010, 10, 100, 50);
     }
 
     @Test
     public void testWBT2() {
-        System.out.println("\ntestInvalidNameFormatForClient");
+        System.out.println("\ntestInvoiceForUnExistingClient");
         addUnsuccessful("mada", "do", 2011, 10, 50,50);
+    }
+
+    @Test
+    public void testAddExistingInvoice() {
+        System.out.println("\ntestAddExistingInvoice");
+        ctrl.AddClient("mada", "doro");
+        addSuccessful("mada", "doro", 2010, 10, 100, 50);
+        addUnsuccessful("mada", "doro", 2010, 10, 100, 50);
+    }
+
+    @Test
+    public void testBadFormatToPay() {
+        System.out.println("\ntestBadFormatToPay");
+        addUnsuccessful("mada", "doro", 2010, 10, -10, 50);
+    }
+
+    @Test
+    public void testBadFormatPaid() {
+        System.out.println("\ntestBadFormatPaid");
+        addUnsuccessful("mada", "doro", 2010, 10, 100, -50);
+    }
+
+    @Test
+    public void testBadFormatMonth() {
+        System.out.println("\ntestBadFormatMonth");
+        addUnsuccessful("mada", "doro", 2010, 30, 100, 50);
+    }
+
+    @Test
+    public void testBadFormatYear() {
+        System.out.println("\ntestBadFormatYear");
+        addUnsuccessful("mada", "doro", 0, 10, 100, 50);
     }
 
     private void addSuccessful(String name, String address, int year, int month, float toPay, float paid) {
@@ -54,6 +86,7 @@ public class AddInvoiceTest extends TestCase{
         int clientsNoAfter = invoiceRepository.getSize();
         assertEquals(clientsNoBefore+1, clientsNoAfter);
         //clean up
+
         deleteLastRecord(fileInvoice);
         deleteLastRecord(fileClient);
     }

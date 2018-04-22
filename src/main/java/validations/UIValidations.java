@@ -53,7 +53,7 @@ public class UIValidations {
     }
 
     public static void isValidYear(int year) throws BadYearException {
-        if(year < 0) {
+        if(year <= 0) {
             throw new BadYearException("Year can't be 0 or less!");
         }
     }

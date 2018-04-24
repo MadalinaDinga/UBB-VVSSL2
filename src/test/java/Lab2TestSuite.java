@@ -1,4 +1,5 @@
 import WBT.AddInvoiceTest;
+import IntegrationT.SnowInvoicesTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -7,6 +8,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         AddClientTest.class,
         AddInvoiceTest.class,
+        SnowInvoicesTest.class,
 })
 
 public class Lab2TestSuite {

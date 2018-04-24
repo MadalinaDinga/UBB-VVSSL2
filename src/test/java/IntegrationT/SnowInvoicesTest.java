@@ -2,7 +2,7 @@ package IntegrationT;
 
 import controller.ClientController;
 import org.junit.After;
-import org.junit.Assert;
+import org.junit.*;
 import org.junit.Before;
 import org.junit.Test;
 import repository.ClientRepository;
@@ -13,6 +13,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
+
+import static junit.framework.TestCase.assertEquals;
 
 public class SnowInvoicesTest {
     private final static int ASCII_CODE_NEw_LINE = 10;
@@ -35,14 +37,47 @@ public class SnowInvoicesTest {
     public void tearDown() {
         //clean up
         deleteFileContent(fileInvoice);
+        deleteFileContent(fileClient);
     }
 
     @Test
     public void testIT1() {
         System.out.println("\ntestAddValidInvoice");
+        testAddValidClient();
+        testAddValidInvoice();
+        testShowInvoices();
+    }
+
+    public void testShowInvoices() {
+        System.out.println("\ntestAddValidInvoice");
+        testSuccessful("mada", "doro");;
+    }
+
+    @Test
+    public void testAddValidInvoice() {
+        System.out.println("\ntestAddValidInvoice");
         ctrl.AddClient("mada", "doro");
-        ctrl.AddSubscriberInvoice("mada", "doro", 2010, 10, 100, 50);
-        testSuccessful("mada", "doro");
+        addSuccessfulInvoice("mada", "doro", 2010, 10, 100, 50);
+    }
+
+    @Test
+    public void testAddValidClient() {
+        System.out.println("\ntestAddValidClient");
+        addSuccessfulClient("mada", "doro");
+    }
+
+    private void addSuccessfulClient(String name, String address) {
+        int clientsNoBefore = clientRepository.getSize();
+        ctrl.AddClient(name, address);
+        int clientsNoAfter = clientRepository.getSize();
+        assertEquals(clientsNoBefore+1, clientsNoAfter);
+    }
+
+    private void addSuccessfulInvoice(String name, String address, int year, int month, float toPay, float paid) {
+        int clientsNoBefore = invoiceRepository.getSize();
+        ctrl.AddSubscriberInvoice(name, address, year, month, toPay, paid);
+        int clientsNoAfter = invoiceRepository.getSize();
+        assertEquals(clientsNoBefore+1, clientsNoAfter);
     }
 
     private void testSuccessful(String name, String address) {

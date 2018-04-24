@@ -1,8 +1,10 @@
-package WBT;
+package IntegrationT;
 
 import controller.ClientController;
-import junit.framework.TestCase;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import repository.ClientRepository;
 import repository.DataManager;
 import repository.InvoiceRepository;
@@ -12,7 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 
-public class AddInvoiceTest extends TestCase{
+public class SnowInvoicesTest {
     private final static int ASCII_CODE_NEw_LINE = 10;
     private static final String fileClient = "src/test/java/clientTest.txt";
     private static final String fileInvoice = "src/test/java/invoiceTest.txt";
@@ -36,67 +38,31 @@ public class AddInvoiceTest extends TestCase{
     }
 
     @Test
-    public void testWBT1() {
+    public void testIT1() {
         System.out.println("\ntestAddValidInvoice");
         ctrl.AddClient("mada", "doro");
-        addSuccessful("mada", "doro", 2010, 10, 100, 50);
+        ctrl.AddSubscriberInvoice("mada", "doro", 2010, 10, 100, 50);
+        testSuccessful("mada", "doro");
     }
 
-    @Test
-    public void testWBT2() {
-        System.out.println("\ntestInvoiceForUnExistingClient");
-        addUnsuccessful("mada", "do", 2011, 10, 50,50);
-    }
-
-    @Test
-    public void testAddExistingInvoice() {
-        System.out.println("\ntestAddExistingInvoice");
-        ctrl.AddClient("mada", "doro");
-        addSuccessful("mada", "doro", 2010, 10, 100, 50);
-        addUnsuccessful("mada", "doro", 2010, 10, 100, 50);
-    }
-
-    @Test
-    public void testBadFormatToPay() {
-        System.out.println("\ntestBadFormatToPay");
-        addUnsuccessful("mada", "doro", 2010, 10, -10, 50);
-    }
-
-    @Test
-    public void testBadFormatPaid() {
-        System.out.println("\ntestBadFormatPaid");
-        addUnsuccessful("mada", "doro", 2010, 10, 100, -50);
-    }
-
-    @Test
-    public void testBadFormatMonth() {
-        System.out.println("\ntestBadFormatMonth");
-        addUnsuccessful("mada", "doro", 2010, 30, 100, 50);
-    }
-
-    @Test
-    public void testBadFormatYear() {
-        System.out.println("\ntestBadFormatYear");
-        addUnsuccessful("mada", "doro", 0, 10, 100, 50);
-    }
-
-    private void addSuccessful(String name, String address, int year, int month, float toPay, float paid) {
-        int clientsNoBefore = invoiceRepository.getSize();
-        ctrl.AddSubscriberInvoice(name, address, year, month, toPay, paid);
-        int clientsNoAfter = invoiceRepository.getSize();
-        assertEquals(clientsNoBefore+1, clientsNoAfter);
+    private void testSuccessful(String name, String address) {
+        String invoicesForClient = ctrl.showInvoicesForClient(name, address);
+        Assert.assertTrue(invoicesForClient.length() > 0);
 
         //clean up
         deleteLastRecord(fileInvoice);
         deleteLastRecord(fileClient);
     }
 
-    private void addUnsuccessful(String name, String address, int year, int month, float toPay, float paid) {
-        int clientsNoBefore = invoiceRepository.getSize();
+    private void testUnsuccessful(String name, String address, int year, int month, float toPay, float paid) {
         ctrl.AddSubscriberInvoice(name, address, year, month, toPay, paid);
-        int clientsNoAfter = invoiceRepository.getSize();
-        assertEquals(clientsNoBefore, clientsNoAfter);
+        //assertEquals(clientsNoBefore, clientsNoAfter);
+
+        //clean up
+        deleteLastRecord(fileInvoice);
+        deleteLastRecord(fileClient);
     }
+
 
     private static void deleteFileContent(String filename){
         try {

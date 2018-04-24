@@ -16,7 +16,7 @@ import java.io.RandomAccessFile;
 
 import static junit.framework.TestCase.assertEquals;
 
-public class SnowInvoicesTest {
+public class BBT {
     private final static int ASCII_CODE_NEw_LINE = 10;
     private static final String fileClient = "src/test/java/clientTest.txt";
     private static final String fileInvoice = "src/test/java/invoiceTest.txt";
@@ -48,17 +48,20 @@ public class SnowInvoicesTest {
         testShowInvoices();
     }
 
+    @Test
     public void testShowInvoices() {
         System.out.println("\ntestAddValidInvoice");
         testSuccessful("mada", "doro");;
     }
 
+    @Test
     public void testAddValidInvoice() {
         System.out.println("\ntestAddValidInvoice");
         ctrl.AddClient("mada", "doro");
         addSuccessfulInvoice("mada", "doro", 2010, 10, 100, 50);
     }
 
+    @Test
     public void testAddValidClient() {
         System.out.println("\ntestAddValidClient");
         addSuccessfulClient("mada", "doro");

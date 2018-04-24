@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.TestCase.assertEquals;
 
 /**
@@ -43,13 +44,13 @@ public class BBT {
         deleteFileContent(fileClient);
     }
 
-//    @Test
-//    public void testBigBang() {
-//        System.out.println("\ntestAddValidInvoice");
-//        testAddValidClient();
-//        testAddValidInvoice();
-//        testShowInvoices();
-//    }
+    @Test
+    public void testBigBang() {
+        System.out.println("\ntestAddValidInvoice");
+        testAddValidClient();
+        testAddValidInvoice();
+        testShowInvoices();
+    }
 
     @Test
     public void testShowInvoices() {
@@ -91,6 +92,7 @@ public class BBT {
         ctrl.AddSubscriberInvoice(name, address, year, month, toPay, paid);
         int clientsNoAfter = invoiceRepository.getSize();
         assertEquals(clientsNoBefore+1, clientsNoAfter);
+        assertFalse(true);
     }
 
     private void showSuccessful(String name, String address) {

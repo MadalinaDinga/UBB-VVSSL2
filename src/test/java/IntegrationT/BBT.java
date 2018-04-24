@@ -41,7 +41,7 @@ public class BBT {
     }
 
     @Test
-    public void testIT1() {
+    public void testBBT() {
         System.out.println("\ntestAddValidInvoice");
         testAddValidClient();
         testAddValidInvoice();
@@ -50,8 +50,10 @@ public class BBT {
 
     @Test
     public void testShowInvoices() {
-        System.out.println("\ntestAddValidInvoice");
-        testSuccessful("mada", "doro");;
+        System.out.println("\ntestShowInvoices");
+        ctrl.AddClient("mada", "doro");
+        ctrl.AddSubscriberInvoice("mada", "doro", 2010, 10, 100, 50);
+        showSuccessful("mada", "doro");
     }
 
     @Test
@@ -59,12 +61,19 @@ public class BBT {
         System.out.println("\ntestAddValidInvoice");
         ctrl.AddClient("mada", "doro");
         addSuccessfulInvoice("mada", "doro", 2010, 10, 100, 50);
+
+        //clean up
+        deleteLastRecord(fileClient);
+        deleteLastRecord(fileInvoice);
     }
 
     @Test
     public void testAddValidClient() {
         System.out.println("\ntestAddValidClient");
         addSuccessfulClient("mada", "doro");
+
+        //clean up
+        deleteLastRecord(fileClient);
     }
 
     private void addSuccessfulClient(String name, String address) {
@@ -81,24 +90,10 @@ public class BBT {
         assertEquals(clientsNoBefore+1, clientsNoAfter);
     }
 
-    private void testSuccessful(String name, String address) {
+    private void showSuccessful(String name, String address) {
         String invoicesForClient = ctrl.showInvoicesForClient(name, address);
         Assert.assertTrue(invoicesForClient.length() > 0);
-
-        //clean up
-        deleteLastRecord(fileInvoice);
-        deleteLastRecord(fileClient);
     }
-
-    private void testUnsuccessful(String name, String address, int year, int month, float toPay, float paid) {
-        ctrl.AddSubscriberInvoice(name, address, year, month, toPay, paid);
-        //assertEquals(clientsNoBefore, clientsNoAfter);
-
-        //clean up
-        deleteLastRecord(fileInvoice);
-        deleteLastRecord(fileClient);
-    }
-
 
     private static void deleteFileContent(String filename){
         try {

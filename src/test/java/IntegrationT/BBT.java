@@ -44,7 +44,7 @@ public class BBT {
     }
 
     @Test
-    public void testIT1() {
+    public void testBigBang() {
         System.out.println("\ntestAddValidInvoice");
         testAddValidClient();
         testAddValidInvoice();

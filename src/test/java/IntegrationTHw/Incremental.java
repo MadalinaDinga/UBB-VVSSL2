@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class Incremental {
     @Test
-    public void testBigBang() {
+    public void testIncremental() {
         Assert.assertTrue(true);
     }
 }

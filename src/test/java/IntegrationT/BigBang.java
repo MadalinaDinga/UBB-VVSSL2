@@ -20,7 +20,7 @@ import static junit.framework.TestCase.assertEquals;
 /**
  * Big Bang Approach
  */
-public class BBT {
+public class BigBang {
     private final static int ASCII_CODE_NEw_LINE = 10;
     private static final String fileClient = "src/test/java/clientTest.txt";
     private static final String fileInvoice = "src/test/java/invoiceTest.txt";
@@ -92,7 +92,6 @@ public class BBT {
         ctrl.AddSubscriberInvoice(name, address, year, month, toPay, paid);
         int clientsNoAfter = invoiceRepository.getSize();
         assertEquals(clientsNoBefore+1, clientsNoAfter);
-        assertFalse(true);
     }
 
     private void showSuccessful(String name, String address) {

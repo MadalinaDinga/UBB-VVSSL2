@@ -43,13 +43,13 @@ public class BBT {
         deleteFileContent(fileClient);
     }
 
-    @Test
-    public void testBigBang() {
-        System.out.println("\ntestAddValidInvoice");
-        testAddValidClient();
-        testAddValidInvoice();
-        testShowInvoices();
-    }
+//    @Test
+//    public void testBigBang() {
+//        System.out.println("\ntestAddValidInvoice");
+//        testAddValidClient();
+//        testAddValidInvoice();
+//        testShowInvoices();
+//    }
 
     @Test
     public void testShowInvoices() {

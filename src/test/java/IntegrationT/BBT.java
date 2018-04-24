@@ -16,6 +16,9 @@ import java.io.RandomAccessFile;
 
 import static junit.framework.TestCase.assertEquals;
 
+/**
+ * Big Bang Approach
+ */
 public class BBT {
     private final static int ASCII_CODE_NEw_LINE = 10;
     private static final String fileClient = "src/test/java/clientTest.txt";

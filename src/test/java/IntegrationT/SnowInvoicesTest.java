@@ -53,14 +53,12 @@ public class SnowInvoicesTest {
         testSuccessful("mada", "doro");;
     }
 
-    @Test
     public void testAddValidInvoice() {
         System.out.println("\ntestAddValidInvoice");
         ctrl.AddClient("mada", "doro");
         addSuccessfulInvoice("mada", "doro", 2010, 10, 100, 50);
     }
 
-    @Test
     public void testAddValidClient() {
         System.out.println("\ntestAddValidClient");
         addSuccessfulClient("mada", "doro");

@@ -41,7 +41,7 @@ public class BBT {
     }
 
     @Test
-    public void testBBT() {
+    public void testIT1() {
         System.out.println("\ntestAddValidInvoice");
         testAddValidClient();
         testAddValidInvoice();

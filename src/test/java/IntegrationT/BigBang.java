@@ -1,10 +1,7 @@
 package IntegrationT;
 
 import controller.ClientController;
-import org.junit.After;
 import org.junit.*;
-import org.junit.Before;
-import org.junit.Test;
 import repository.ClientRepository;
 import repository.DataManager;
 import repository.InvoiceRepository;
@@ -13,8 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
-
-import static junit.framework.TestCase.assertEquals;
 
 /**
  * Big Bang Approach
@@ -83,14 +78,14 @@ public class BigBang {
         int clientsNoBefore = clientRepository.getSize();
         ctrl.AddClient(name, address);
         int clientsNoAfter = clientRepository.getSize();
-        assertEquals(clientsNoBefore+1, clientsNoAfter);
+        Assert.assertEquals(clientsNoBefore+1, clientsNoAfter);
     }
 
     private void addSuccessfulInvoice(String name, String address, int year, int month, float toPay, float paid) {
         int clientsNoBefore = invoiceRepository.getSize();
         ctrl.AddSubscriberInvoice(name, address, year, month, toPay, paid);
         int clientsNoAfter = invoiceRepository.getSize();
-        assertEquals(clientsNoBefore+1, clientsNoAfter);
+        Assert.assertEquals(clientsNoBefore+1, clientsNoAfter);
     }
 
     private void showSuccessful(String name, String address) {

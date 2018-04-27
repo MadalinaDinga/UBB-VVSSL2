@@ -5,5 +5,6 @@ public class Incremental {
     @Test
     public void testIncremental() {
         Assert.assertTrue(true);
+
     }
 }

@@ -89,4 +89,10 @@ public class AddClientTest extends TestCase{
         int clientsNoAfter = clientRepository.getSize();
         assertEquals(clientsNoBefore, clientsNoAfter);
     }
+
+    @Test
+    public void testIncremental() {
+        Assert.assertTrue(true);
+
+    }
 }
